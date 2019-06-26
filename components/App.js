@@ -12,8 +12,8 @@ import {
 // const isSearched = searchTerm => item =>
 //   item.title.toLowerCase().includes(searchTerm.toLowerCase());
 
-const DEFAULT_QUERY = 'react';
-const DEFAULT_HPP = '100';
+const DEFAULT_QUERY = 'next.js';
+const DEFAULT_HPP = '30';
 
 const PATH_BASE = 'https://hn.algolia.com/api/v1';
 const PATH_SEARCH = '/search';
@@ -203,3 +203,5 @@ const Button = ({ onClick, className = '', children }) => (
 );
 
 export default App;
+
+export { Search, Table, Button };
