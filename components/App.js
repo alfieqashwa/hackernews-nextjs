@@ -31,6 +31,7 @@ class App extends Component {
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
     this.fetchSearchTopStories = this.fetchSearchTopStories.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
+    this.onSearchSubmit = this.onSearchSubmit.bind(this);
 
     this.onDismiss = this.onDismiss.bind(this);
   }
@@ -49,6 +50,12 @@ class App extends Component {
   componentDidMount() {
     const { searchTerm } = this.state;
     this.fetchSearchTopStories(searchTerm);
+  }
+
+  onSearchSubmit(e) {
+    const { searchTerm } = this.state;
+    this.fetchSearchTopStories(searchTerm);
+    e.preventDefault();
   }
 
   onSearchChange(event) {
@@ -73,31 +80,30 @@ class App extends Component {
     return (
       <PageStyle>
         <InteractionsStyle>
-          <Search value={searchTerm} onChange={this.onSearchChange}>
+          <Search
+            value={searchTerm}
+            onChange={this.onSearchChange}
+            onSubmit={this.onSearchSubmit}
+          >
             Search
           </Search>
         </InteractionsStyle>
-        {result && (
-          <Table
-            list={result.hits}
-            pattern={searchTerm}
-            onDismiss={this.onDismiss}
-          />
-        )}
+        {result && <Table list={result.hits} onDismiss={this.onDismiss} />}
       </PageStyle>
     );
   }
 }
 
-const Search = ({ value, onChange, children }) => (
-  <form>
-    {children} <input type="text" value={value} onChange={onChange} />
+const Search = ({ value, onChange, onSubmit, children }) => (
+  <form onSubmit={onSubmit}>
+    <input type="text" value={value} onChange={onChange} />
+    <button type="submit">{children}</button>
   </form>
 );
 
-const Table = ({ list, pattern, onDismiss }) => (
+const Table = ({ list, onDismiss }) => (
   <TableStyle>
-    {list.filter(isSearched(pattern)).map(item => (
+    {list.map(item => (
       <TableRowStyle key={item.objectID}>
         <span style={{ width: '40%' }}>
           <a href={item.url}>{item.title}</a>
