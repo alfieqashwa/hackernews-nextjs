@@ -1,0 +1,191 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button has a valid snapshot 1`] = `
+<button
+  className=""
+  type="button"
+>
+  Give Me More
+</button>
+`;
+
+exports[`Search has a valid snapshot 1`] = `
+<form>
+  <input
+    type="text"
+  />
+  <button
+    type="submit"
+  >
+    Search
+  </button>
+</form>
+`;
+
+exports[`Table has a valid snapshot 1`] = `
+<div
+  className="Styles__TableStyle-sc-1apv0p9-2 hLdITm"
+>
+  <div
+    className="Styles__TableRowStyle-sc-1apv0p9-3 jeLGvS"
+  >
+    <span
+      style={
+        Object {
+          "width": "40%",
+        }
+      }
+    >
+      <a>
+        1
+      </a>
+    </span>
+    <span
+      style={
+        Object {
+          "width": "30%",
+        }
+      }
+    >
+      1
+    </span>
+    <span
+      style={
+        Object {
+          "width": "10%",
+        }
+      }
+    >
+      1
+    </span>
+    <span
+      style={
+        Object {
+          "width": "10%",
+        }
+      }
+    >
+      3
+    </span>
+    <span
+      style={
+        Object {
+          "width": "10%",
+        }
+      }
+    >
+      <button
+        className={
+          Array [
+            "border-width:0;background:transparent;color:inherit;text-align:inherit;-webkit-font-smoothing:inherit;padding:0;font-size:pointer;cursor:pointer;",
+          ]
+        }
+        onClick={[Function]}
+        type="button"
+      >
+        Dismiss
+      </button>
+    </span>
+  </div>
+  <div
+    className="Styles__TableRowStyle-sc-1apv0p9-3 jeLGvS"
+  >
+    <span
+      style={
+        Object {
+          "width": "40%",
+        }
+      }
+    >
+      <a>
+        2
+      </a>
+    </span>
+    <span
+      style={
+        Object {
+          "width": "30%",
+        }
+      }
+    >
+      2
+    </span>
+    <span
+      style={
+        Object {
+          "width": "10%",
+        }
+      }
+    >
+      1
+    </span>
+    <span
+      style={
+        Object {
+          "width": "10%",
+        }
+      }
+    >
+      2
+    </span>
+    <span
+      style={
+        Object {
+          "width": "10%",
+        }
+      }
+    >
+      <button
+        className={
+          Array [
+            "border-width:0;background:transparent;color:inherit;text-align:inherit;-webkit-font-smoothing:inherit;padding:0;font-size:pointer;cursor:pointer;",
+          ]
+        }
+        onClick={[Function]}
+        type="button"
+      >
+        Dismiss
+      </button>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`has a valid snapshot 1`] = `
+<div
+  className="Styles__PageStyle-sc-1apv0p9-0 dshOaW"
+>
+  <div
+    className="Styles__InteractionsStyle-sc-1apv0p9-1 kKEdFQ"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <input
+        onChange={[Function]}
+        type="text"
+        value="next.js"
+      />
+      <button
+        type="submit"
+      >
+        Search
+      </button>
+    </form>
+  </div>
+  <div
+    className="Styles__TableStyle-sc-1apv0p9-2 hLdITm"
+  />
+  <div
+    className="Styles__InteractionsStyle-sc-1apv0p9-1 kKEdFQ"
+  >
+    <button
+      className=""
+      onClick={[Function]}
+      type="button"
+    >
+      Give Me More
+    </button>
+  </div>
+</div>
+`;

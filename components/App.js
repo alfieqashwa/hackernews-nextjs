@@ -149,7 +149,7 @@ class App extends Component {
           <Button
             onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}
           >
-            More
+            Give Me More
           </Button>
         </InteractionsStyle>
       </PageStyle>

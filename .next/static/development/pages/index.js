@@ -4,11 +4,14 @@
 /*!***************************!*\
   !*** ./components/App.js ***!
   \***************************/
-/*! exports provided: default */
+/*! exports provided: default, Search, Table, Button */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Search", function() { return Search; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Table", function() { return Table; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Button", function() { return Button; });
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/toConsumableArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js");
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/classCallCheck */ "./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js");
@@ -37,15 +40,16 @@ var _jsxFileName = "/home/qashwa/NEXTJS/hackernews-nextjs/components/App.js";
 
 
 
+ // const isSearched = searchTerm => item =>
+//   item.title.toLowerCase().includes(searchTerm.toLowerCase());
 
-var DEFAULT_QUERY = 'react';
-var DEFAULT_HPP = '100';
+var DEFAULT_QUERY = 'next.js';
+var DEFAULT_HPP = '30';
 var PATH_BASE = 'https://hn.algolia.com/api/v1';
 var PATH_SEARCH = '/search';
 var PARAM_SEARCH = 'query=';
 var PARAM_PAGE = 'page=';
-var PARAM_HPP = 'hitsPerPage='; // const isSearched = searchTerm => item =>
-//   item.title.toLowerCase().includes(searchTerm.toLowerCase());
+var PARAM_HPP = 'hitsPerPage=';
 
 var App =
 /*#__PURE__*/
@@ -105,7 +109,7 @@ function (_Component) {
 
       var page = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       axios__WEBPACK_IMPORTED_MODULE_10___default()("".concat(PATH_BASE).concat(PATH_SEARCH, "?").concat(PARAM_SEARCH).concat(searchTerm, "&").concat(PARAM_PAGE).concat(page, "&").concat(PARAM_HPP).concat(DEFAULT_HPP)).then(function (result) {
-        return _this2.setSearchTopStories(result.data);
+        return _this2._isMounted && _this2.setSearchTopStories(result.data);
       }).catch(function (error) {
         return _this2._isMounted && _this2.setState({
           error: error
@@ -129,9 +133,9 @@ function (_Component) {
     }
   }, {
     key: "onSearchChange",
-    value: function onSearchChange(event) {
+    value: function onSearchChange(e) {
       this.setState({
-        searchTerm: event.target.value
+        searchTerm: e.target.value
       });
     }
   }, {
@@ -383,6 +387,7 @@ var Button = function Button(_ref3) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
 
 /***/ }),
 
