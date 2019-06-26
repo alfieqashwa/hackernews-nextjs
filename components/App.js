@@ -9,6 +9,9 @@ import {
   TableRowStyle
 } from '../styles/Styles';
 
+// const isSearched = searchTerm => item =>
+//   item.title.toLowerCase().includes(searchTerm.toLowerCase());
+
 const DEFAULT_QUERY = 'react';
 const DEFAULT_HPP = '100';
 
@@ -17,9 +20,6 @@ const PATH_SEARCH = '/search';
 const PARAM_SEARCH = 'query=';
 const PARAM_PAGE = 'page=';
 const PARAM_HPP = 'hitsPerPage=';
-
-// const isSearched = searchTerm => item =>
-//   item.title.toLowerCase().includes(searchTerm.toLowerCase());
 class App extends Component {
   _isMounted = false;
 
@@ -66,7 +66,7 @@ class App extends Component {
     axios(
       `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`
     )
-      .then(result => this.setSearchTopStories(result.data))
+      .then(result => this._isMounted && this.setSearchTopStories(result.data))
       .catch(error => this._isMounted && this.setState({ error }));
   }
 
@@ -82,8 +82,8 @@ class App extends Component {
     this._isMounted = false;
   }
 
-  onSearchChange(event) {
-    this.setState({ searchTerm: event.target.value });
+  onSearchChange(e) {
+    this.setState({ searchTerm: e.target.value });
   }
 
   onSearchSubmit(e) {
