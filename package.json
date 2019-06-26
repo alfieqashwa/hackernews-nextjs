@@ -1,0 +1,20 @@
+{
+  "name": "hackernews-nextjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alfieqashwa/hackernews-nextjs.git"
+  },
+  "keywords": [],
+  "author": "Alfie Qashwa <alfieqashwa@gmail.com> (example.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alfieqashwa/hackernews-nextjs/issues"
+  },
+  "homepage": "https://github.com/alfieqashwa/hackernews-nextjs#readme"
+}
