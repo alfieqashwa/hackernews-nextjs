@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { css } from 'styled-components';
 
 import {
@@ -17,19 +18,19 @@ const PARAM_SEARCH = 'query=';
 const PARAM_PAGE = 'page=';
 const PARAM_HPP = 'hitsPerPage=';
 
-const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${DEFAULT_QUERY}&${PARAM_PAGE}`;
-
-const isSearched = searchTerm => item =>
-  item.title.toLowerCase().includes(searchTerm.toLowerCase());
-
+// const isSearched = searchTerm => item =>
+//   item.title.toLowerCase().includes(searchTerm.toLowerCase());
 class App extends Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
 
     this.state = {
       result: null,
       searchKey: '',
-      searchTerm: DEFAULT_QUERY
+      searchTerm: DEFAULT_QUERY,
+      error: null
     };
 
     this.needsToSearchTopStories = this.needsToSearchTopStories.bind(this);
@@ -37,7 +38,6 @@ class App extends Component {
     this.fetchSearchTopStories = this.fetchSearchTopStories.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
-
     this.onDismiss = this.onDismiss.bind(this);
   }
 
@@ -51,6 +51,7 @@ class App extends Component {
 
     const oldHits =
       results && results[searchKey] ? results[searchKey].hits : [];
+
     const updatedHits = [...oldHits, ...hits];
 
     this.setState({
@@ -62,18 +63,27 @@ class App extends Component {
   }
 
   fetchSearchTopStories(searchTerm, page = 0) {
-    fetch(
+    axios(
       `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`
     )
-      .then(response => response.json())
-      .then(result => this.setSearchTopStories(result))
-      .catch(e => e);
+      .then(result => this.setSearchTopStories(result.data))
+      .catch(error => this._isMounted && this.setState({ error }));
   }
 
   componentDidMount() {
+    this._isMounted = true;
+
     const { searchTerm } = this.state;
     this.setState({ searchKey: searchTerm });
     this.fetchSearchTopStories(searchTerm);
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  onSearchChange(event) {
+    this.setState({ searchTerm: event.target.value });
   }
 
   onSearchSubmit(e) {
@@ -87,16 +97,13 @@ class App extends Component {
     e.preventDefault();
   }
 
-  onSearchChange(event) {
-    this.setState({ searchTerm: event.target.value });
-  }
-
   onDismiss(id) {
     const { searchKey, results } = this.state;
     const { hits, page } = results[searchKey];
 
     const isNotId = item => item.objectID !== id;
     const updatedHits = hits.filter(isNotId);
+
     this.setState({
       results: {
         ...results,
@@ -106,14 +113,18 @@ class App extends Component {
   }
 
   render() {
-    const { searchTerm, result, searchKey } = this.state;
+    const { searchTerm, results, searchKey, error } = this.state;
     const page =
       (results && results[searchKey] && results[searchKey].page) || 0;
     const list =
-      (results && results[searchKey] && results[searchKey].hits) || 0;
+      (results && results[searchKey] && results[searchKey].hits) || [];
 
     // if (!result) {
     //   return null;
+    // }
+
+    // if (error) {
+    //   return <p>Sumthing went wrong, dude!</p>;
     // }
 
     return (
@@ -126,14 +137,20 @@ class App extends Component {
           >
             Search
           </Search>
-          <Table list={result.hits} onDismiss={this.onDismiss} />
+        </InteractionsStyle>
+        {error ? (
           <InteractionsStyle>
-            <Button
-              onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}
-            >
-              More
-            </Button>
+            <p>Sumthing went wrong, Dude!</p>
           </InteractionsStyle>
+        ) : (
+          <Table list={list} onDismiss={this.onDismiss} />
+        )}
+        <InteractionsStyle>
+          <Button
+            onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}
+          >
+            More
+          </Button>
         </InteractionsStyle>
       </PageStyle>
     );
@@ -186,5 +203,3 @@ const Button = ({ onClick, className = '', children }) => (
 );
 
 export default App;
-
-// Next: Getting Real with an API
